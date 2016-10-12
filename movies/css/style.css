@@ -1,0 +1,25 @@
+/*table{
+    border-spacing: 10px;
+    border-collapse: separate;
+}*/
+
+.container{
+	margin: 15px;
+}
+
+.ng-invalid.ng-dirty{
+	border-color:red;
+}
+
+.ng-valid.ng-dirty{
+	border-color:green;
+}
+
+.pointer
+{
+	cursor:pointer !important;
+}
+
+.results{
+	margin-top: 20px;
+}
