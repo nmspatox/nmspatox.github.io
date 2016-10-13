@@ -1,0 +1,112 @@
+<div class="row">			
+	<div class="col-sm-6">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h4 class="panel-title">
+					<a data-toggle="collapse" href="#collapse-new">Add New Movie</a>
+				</h4>
+			</div>
+			<div id="collapse-new" class="panel-collapse collapse in">
+				<div class="panel-body">
+					<label>Preview => </label>{{ moviesCtrl.movie }}
+					<form name="newMovieForm" class="form-horizontal" ng-submit="moviesCtrl.addMovie(moviesCtrl.movie, newMovieForm)" novalidate>		
+						<legend>New Movie:</legend>
+						<div class="form-group">
+							<label for="author" class="control-label col-sm-2">Title:</label>
+							<div class="col-sm-10">
+								<input id="title" name="author" class="form-control" type="text" ng-model="moviesCtrl.movie.title" required>
+								<div class="input-error" ng-show="newMovieForm.$submitted || newMovieForm.author.$touched">
+							      <div ng-show="newMovieForm.author.$error.required">The title is required.</div>
+							    </div>										
+							</div>					
+						</div>
+						<div class="form-group">
+							<label for="title" class="control-label col-sm-2">Description:</label>
+							<div class="col-sm-10">
+								<textarea id="description" name="description" class="form-control col-sm-10" ng-model="moviesCtrl.movie.description" required></textarea>
+								<div class="input-error" ng-show="newMovieForm.$submitted || newMovieForm.description.$touched">
+							      <div ng-show="newMovieForm.description.$error.required">The description is required.</div>
+							    </div>
+							</div>					
+						</div>			
+						<div class="form-group">
+							<label for="title" class="control-label col-sm-2">Rate:</label>
+							<div class="col-sm-9">
+								<input type="range" name="rate" min="1" max="5" ng-model="moviesCtrl.movie.rate"
+								required>
+								<div class="input-error" ng-show="newMovieForm.$submitted || newMovieForm.rate.$touched">
+							      <div ng-show="newMovieForm.rate.$error.required">The rate is required.</div>
+							    </div>
+							</div>
+							<div class="col-sm-1">
+								{{moviesCtrl.movie.rate}}
+							</div>
+						</div>
+						<button type="submit" class="btn btn-default">Add</button><br>		
+						<br>
+					</form>	
+				</div>
+			</div>					
+		</div>	
+	</div>
+	<div class="col-sm-6">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h4 class="panel-title">
+					<a data-toggle="collapse" href="#collapsesearch">Search Movie</a>
+				</h4>
+			</div>
+			<div id="collapsesearch" class="panel-collapse collapse in">
+				<div class="panel-body">							
+					<div class="col-sm-10">
+						<div class="input-group">
+							<div class="input-group-addon"><i class="fa fa-search"></i></div>
+							<input type="text" class="form-control" placeholder="Search" ng-model="searchedMovie">
+						</div>
+						<div class="results">
+							<table class="table">
+								<thead>
+									<tr>
+										<th>Actions</th>
+										<th class="pointer" ng-click="moviesCtrl.sortBy('title')">
+										Title 
+											<span class="fa fa-sort-down columnSortIcons" ng-if="moviesCtrl.isActiveSort('title', -1)"></span>
+											<span class="fa fa-sort-up columnSortIcons" ng-if="moviesCtrl.isActiveSort('title', 1)"></span>
+										</th>
+										<th class="pointer" ng-click="moviesCtrl.sortBy('description')">	Description
+											<span class="fa fa-sort-down columnSortIcons" ng-if="moviesCtrl.isActiveSort('description', -1)"></span>
+											<span class="fa fa-sort-up columnSortIcons" ng-if="moviesCtrl.isActiveSort('description', 1)"></span>
+										</th>
+										<th class="pointer" ng-click="moviesCtrl.sortBy('rate')">
+											Rate
+											<span class="fa fa-sort-down columnSortIcons" ng-if="moviesCtrl.isActiveSort('rate', -1)"></span>
+											<span class="fa fa-sort-up columnSortIcons" ng-if="moviesCtrl.isActiveSort('rate', 1)"></span>
+										</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr ng-repeat="movie in moviesCtrl.movies | filter:searchedMovie | orderBy:orderProperty track by $index">
+										<td>
+											<a class="btn btn-danger" href="#" ng-click="moviesCtrl.deleteMovie($index)">
+											<i class="fa fa-trash fa-white"></i>
+												Delete
+											</a>													
+											<a class="btn btn-info" ng-href="edit/{{movie.id}}" ">
+											<i class="fa fa-edit fa-white"></i>
+												Edit
+											</a>
+										</td>
+										<td>{{movie.title}}</td>
+										<td>{{movie.description}}</td>
+										<td>{{movie.rate}}</td>
+									</tr>
+								</tbody>					
+							</table>
+						</div>     							
+					</div>							
+				</div>					
+			</div>					
+		</div>
+		<br />				
+	</div>
+</div>			

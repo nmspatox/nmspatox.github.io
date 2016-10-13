@@ -16,6 +16,7 @@ function(){
 				return movies;
 			},
 			addMovie : function(movie){
+				movie.id = movies.length + 1;
 				movies.push(movie);
 				$window.localStorage.movies = angular.toJson(movies);
 			},

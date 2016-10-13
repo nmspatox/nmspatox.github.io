@@ -4,15 +4,18 @@ function(){
 	.config(function($routeProvider, $locationProvider) {
 	    $routeProvider
 	    .when("/", {
-	        templateUrl : "list.html",
+	        templateUrl : "partials/list.html",
 	        controller: "MoviesListController",
 	        controllerAs: "moviesCtrl"
-	    })	    
-	    .when("/edit", {
-	        templateUrl : "edit.html",
+	    })		       
+	    .when("/edit/:id", {
+	        templateUrl : "partials/edit.html",
 	        controller: "MoviesEditController",
-	        controllerAs: "moviesCtrl"
-	    });
+	        controllerAs: "vm"
+	    })
+	    .otherwise({
+            redirectTo:'/'
+        });
 
 	    // use the HTML5 History API
         $locationProvider.html5Mode(true);

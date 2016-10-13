@@ -23,6 +23,7 @@ function(){
 				MoviesService.addMovie(movie);
 				vm.movie = {};
 				form.$setPristine();
+				form.$setUntouched();
 			}			
 		}
 
@@ -37,9 +38,11 @@ function(){
 		}			
 	}
 
-	function MoviesEditController(MoviesService){
+	function MoviesEditController(MoviesService, $routeParams) {
 		var vm = this;
 		console.log("init MoviesEditController");
+		console.log($routeParams);
+		vm.id = $routeParams.id;
 	}
 }
 )();
