@@ -1,7 +1,7 @@
 (
 function(){
   	angular.module('MoviesApp')
-	.config(function($routeProvider) {
+	.config(function($routeProvider, $locationProvider) {
 	    $routeProvider
 	    .when("/", {
 	        templateUrl : "list.html",
@@ -13,5 +13,8 @@ function(){
 	        controller: "MoviesEditController",
 	        controllerAs: "moviesCtrl"
 	    });
+
+	    // use the HTML5 History API
+        $locationProvider.html5Mode(true);
 	});
 })();

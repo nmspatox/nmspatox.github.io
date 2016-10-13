@@ -6,7 +6,7 @@ function(){
 
 	function MoviesListController(MoviesService){
 		var vm = this;
-
+		console.log("init MoviesListController");
 		vm.movie = {};
 		vm.orderProperty = 'title';		
 		vm.orderDirection= 1;		
@@ -39,6 +39,7 @@ function(){
 
 	function MoviesEditController(MoviesService){
 		var vm = this;
+		console.log("init MoviesEditController");
 	}
 }
 )();
