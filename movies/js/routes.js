@@ -5,12 +5,13 @@ function(){
 	    $routeProvider
 	    .when("/", {
 	        templateUrl : "list.html",
-	        controller: "MoviesListController"
+	        controller: "MoviesListController",
+	        controllerAs: "moviesCtrl"
 	    })	    
 	    .when("/edit", {
 	        templateUrl : "edit.html",
-	        controller: "MoviesEditController"
-
+	        controller: "MoviesEditController",
+	        controllerAs: "moviesCtrl"
 	    });
 	});
 })();
