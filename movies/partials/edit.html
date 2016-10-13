@@ -1,2 +1,55 @@
-<h1>Edit</h1>
-<p>Id: {{ vm.id }}</p>
+<div class="row">			
+	<div class="col-sm-6">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h4 class="panel-title">
+					<a data-toggle="collapse" href="#collapse-new">Edit Movie</a>
+				</h4>
+			</div>
+			<div id="collapse-new" class="panel-collapse collapse in">
+				<div class="panel-body">
+					<label>Preview => </label>{{ vm.movie }}
+					<form name="movieForm" class="form-horizontal" ng-submit="vm.updateMovie(vm.movie, movieForm)" novalidate>								
+						<div class="form-group">
+							<label for="author" class="control-label">Title:</label>							
+							<input id="title" name="author" class="form-control" type="text" ng-model="vm.movie.title" required>
+							<div class="input-error" ng-show="movieForm.$submitted || movieForm.author.$touched">
+								<div ng-show="movieForm.author.$error.required">The title is required.</div>
+							</div>																	
+						</div>
+						<div class="form-group">
+							<label for="title" class="control-label">Description:</label>							
+							<textarea id="description" name="description" class="form-control" ng-model="vm.movie.description" required></textarea>
+							<div class="input-error" ng-show="movieForm.$submitted || movieForm.description.$touched">
+								<div ng-show="movieForm.description.$error.required">The description is required.</div>
+							</div>							
+						</div>			
+						<div class="form-group">
+
+							<label for="title" class="control-label">Rate:</label>
+							<div class="row">
+								<div class="col-sm-11">
+									<input type="range" name="rate" min="1" max="5" ng-model="vm.movie.rate"
+									required>
+									<div class="input-error" ng-show="movieForm.$submitted || movieForm.rate.$touched">
+										<div ng-show="movieForm.rate.$error.required">The rate is required.</div>
+									</div>
+								</div>
+								<div class="col-sm-1">
+									{{vm.movie.rate}}
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+					      	<div class="col-sm-offset-2 col-sm-10">
+								<a class="btn btn-danger" href="/">Cancel</a>	
+								<button type="submit" class="btn btn-success">Update</button>
+							</div>
+						</div>						
+						<br>
+					</form>	
+				</div>
+			</div>					
+		</div>	
+	</div>
+</div>

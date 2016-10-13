@@ -27,3 +27,7 @@
 .input-error{
 	color:red;
 }
+
+.form-horizontal{
+	padding: 15px;
+}

@@ -6,7 +6,7 @@ function(){
 	    .when("/", {
 	        templateUrl : "partials/list.html",
 	        controller: "MoviesListController",
-	        controllerAs: "moviesCtrl"
+	        controllerAs: "vm"
 	    })		       
 	    .when("/edit/:id", {
 	        templateUrl : "partials/edit.html",

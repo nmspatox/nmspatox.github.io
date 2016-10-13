@@ -6,7 +6,7 @@ function(){
 
 	function MoviesListController(MoviesService){
 		var vm = this;
-		console.log("init MoviesListController");
+
 		vm.movie = {};
 		vm.orderProperty = 'title';		
 		vm.orderDirection= 1;		
@@ -15,15 +15,14 @@ function(){
 		vm.deleteMovie = (idx) => MoviesService.deleteMovie(idx);
 		vm.sortBy = sortBy;
 		vm.isActiveSort = (x, y) => vm.orderProperty == x && vm.orderDirection != y;
+		vm.reset = resetForm;
 
 		vm.refreshMovies();
 
 		function addNewMovie(movie, form){
 			if (form.$valid){
 				MoviesService.addMovie(movie);
-				vm.movie = {};
-				form.$setPristine();
-				form.$setUntouched();
+				vm.resetForm();
 			}			
 		}
 
@@ -35,14 +34,30 @@ function(){
 
 		function refreshMovies(){
 			vm.movies = MoviesService.getAll(vm.orderProperty, vm.orderDirection);
-		}			
+		}	
+
+		function resetForm(form){
+			vm.movie = {};
+			form.$setPristine();
+			form.$setUntouched();
+		}		
 	}
 
-	function MoviesEditController(MoviesService, $routeParams) {
+	function MoviesEditController(MoviesService, $routeParams, $location) {
 		var vm = this;
-		console.log("init MoviesEditController");
-		console.log($routeParams);
 		vm.id = $routeParams.id;
+
+		vm.movie = MoviesService.getById(vm.id);
+		vm.updateMovie = updateMovie;
+
+		function updateMovie(movie, form){
+			if (form.$valid){
+				MoviesService.updateMovie(movie);
+				vm.movie = {};
+
+				$location.url('/');
+			}			
+		}
 	}
 }
 )();
