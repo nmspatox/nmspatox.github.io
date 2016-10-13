@@ -1,9 +1,10 @@
 (
 function(){
 	angular.module('MoviesApp')
-	.controller('MoviesController', MoviesController);
+	.controller('MoviesListController', MoviesListController)
+	.controller('MoviesEditController', MoviesEditController);;
 
-	function MoviesController(MoviesService){
+	function MoviesListController(MoviesService){
 		var vm = this;
 
 		vm.movie = {};
@@ -34,6 +35,10 @@ function(){
 		function refreshMovies(){
 			vm.movies = MoviesService.getAll(vm.orderProperty, vm.orderDirection);
 		}			
+	}
+
+	function MoviesEditController(MoviesService){
+		var vm = this;
 	}
 }
 )();

@@ -4,11 +4,13 @@ function(){
 	.config(function($routeProvider) {
 	    $routeProvider
 	    .when("/", {
-	        templateUrl : "edit.html",
-	        controller: "MainController"
+	        templateUrl : "list.html",
+	        controller: "MoviesListController"
 	    })	    
 	    .when("/edit", {
-	        templateUrl : "edit.html"
+	        templateUrl : "edit.html",
+	        controller: "MoviesEditController"
+
 	    });
 	});
 })();
