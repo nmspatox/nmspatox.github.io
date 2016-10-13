@@ -23,3 +23,7 @@
 .results{
 	margin-top: 20px;
 }
+
+.input-error{
+	color:red;
+}
