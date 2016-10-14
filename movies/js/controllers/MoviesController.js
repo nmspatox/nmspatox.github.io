@@ -55,7 +55,7 @@ function(){
 				MoviesService.updateMovie(movie);
 				vm.movie = {};
 
-				$location.url('/');
+				$location.url('/movies/');
 			}			
 		}
 	}
