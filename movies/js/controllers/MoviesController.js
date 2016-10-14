@@ -66,7 +66,7 @@ function(){
 			if (vm.movie.title){				
 				MoviesOMDBService.searchByTitle(vm.movie.title)
 					.success(function(data) {			            
-			            vm.movies = data.Search;
+			            vm.movies = data.Search;			            
 			        })
 			        .error(function(data) {
 			            console.log('Error: ' + data);
@@ -77,6 +77,7 @@ function(){
 		function getDetails(movieFromList) {
 			vm.movie.year = parseInt(movieFromList.Year);
 			vm.movie.poster = movieFromList.Poster;
+			vm.movie.imdbId = movieFromList.imdbID;
 		}	
 	}
 }

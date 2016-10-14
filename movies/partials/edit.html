@@ -95,7 +95,7 @@
 									</tr>
 								</thead>
 								<tbody>
-									<tr ng-repeat="movie in vm.movies | filter:searchedMovie | orderBy:orderProperty track by $index">
+									<tr ng-repeat="movie in vm.movies | filter:searchedMovie | orderBy:orderProperty track by $index" ng-class="{ 'active': vm.movie.imdbId == movie.imdbID }">
 										<td>											
 											<a class="btn btn-primary" ng-click="vm.getDetails(movie)">
 											<i class="fa fa-plus fa-white"></i>

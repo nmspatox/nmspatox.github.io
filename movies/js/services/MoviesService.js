@@ -44,7 +44,7 @@ function(){
 	}
 
 	function MoviesOMDBService($http){
-		var omdbUrl = 'http://www.omdbapi.com/';
+		var omdbUrl = 'https://www.omdbapi.com/';
 		
 		return {
 			searchByTitle(title){

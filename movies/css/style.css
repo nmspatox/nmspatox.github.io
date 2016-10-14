@@ -44,3 +44,7 @@
 .image-container img{
 	width: 50%;	
 }
+
+.table>tbody>tr.active>td{
+	background-color: rgba(36, 146, 193, 0.3);	
+}
