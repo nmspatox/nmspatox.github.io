@@ -48,3 +48,7 @@
 .table>tbody>tr.active>td{
 	background-color: rgba(36, 146, 193, 0.3);	
 }
+
+.loading{
+	color: green;
+}
