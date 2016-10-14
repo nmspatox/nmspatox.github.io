@@ -1,6 +1,8 @@
 (
 function(){
-	angular.module('MoviesApp').factory('MoviesService', MoviesService);
+	angular.module('MoviesApp')
+	.factory('MoviesService', MoviesService)
+	.factory('MoviesOMDBService', MoviesOMDBService);
 
 	var movies = [];
 
@@ -38,6 +40,16 @@ function(){
 				movies.splice(idx, 1);
 				$window.localStorage.movies = angular.toJson(movies);
 			}
+		};
+	}
+
+	function MoviesOMDBService($http){
+		var omdbUrl = 'http://www.omdbapi.com/';
+		
+		return {
+			searchByTitle(title){
+				return $http.get(omdbUrl + '?s=' + title);
+			}	
 		};
 	}
 }

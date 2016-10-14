@@ -1,5 +1,5 @@
 <div class="row">			
-	<div class="col-sm-6">
+	<div class="col-sm-4">
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<h4 class="panel-title">
@@ -8,7 +8,8 @@
 			</div>
 			<div id="collapse-new" class="panel-collapse collapse in">
 				<div class="panel-body">
-					<label>Preview => </label>{{ vm.movie }}
+					<label>Preview => </label>
+					<span class="preview-json">{{ vm.movie }}</span>
 					<form name="movieForm" class="form-horizontal" ng-submit="vm.updateMovie(vm.movie, movieForm)" novalidate>								
 						<div class="form-group">
 							<label for="author" class="control-label">Title:</label>							
@@ -25,7 +26,6 @@
 							</div>							
 						</div>			
 						<div class="form-group">
-
 							<label for="title" class="control-label">Rate:</label>
 							<div class="row">
 								<div class="col-sm-11">
@@ -40,6 +40,17 @@
 								</div>
 							</div>
 						</div>
+						<div class="form-group" ng-if="vm.movie.year">
+							<label for="year" class="control-label">Year:</label>
+							<input type="number" name="year" class="form-control" ng-model="vm.movie.year">
+						</div>
+						<div class="form-group" ng-if="vm.movie.poster">
+							<label for="poster" class="control-label">Poster:</label>
+							<textarea id="poster" name="poster" class="form-control" ng-model="vm.movie.poster"></textarea>
+							<div class="image-container">								
+								<img ng-if="vm.movie.poster" ng-src="{{ vm.movie.poster }}">
+							</div>									
+						</div>						
 						<div class="form-group">					      
 							<a class="btn btn-danger" href="/movies">Cancel</a>	
 							<button type="submit" class="btn btn-success">Update</button>							
@@ -48,5 +59,59 @@
 				</div>
 			</div>					
 		</div>	
+	</div>
+	<div class="col-sm-8">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h4 class="panel-title">
+					<a data-toggle="collapse" href="#collapsesearch">Search Movie</a>
+				</h4>
+			</div>
+			<div id="collapsesearch" class="panel-collapse collapse in">
+				<div class="panel-body">							
+					<div class="col-sm-10">
+						<div class="input-group">
+							<button type="button" class="btn btn-info" ng-click=vm.searchInOMDB()>Get data from OMDB</button>
+						</div>
+						<div class="results">
+							<table class="table">
+								<thead>
+									<tr>
+										<th>Actions</th>
+										<th class="pointer" ng-click="vm.sortBy('Title')">
+										Title 
+											<span class="fa fa-sort-down columnSortIcons" ng-if="vm.isActiveSort('Title', -1)"></span>
+											<span class="fa fa-sort-up columnSortIcons" ng-if="vm.isActiveSort('Title', 1)"></span>
+										</th>
+										<th class="pointer" ng-click="vm.sortBy('Year')">	Description
+											<span class="fa fa-sort-down columnSortIcons" ng-if="vm.isActiveSort('Year', -1)"></span>
+											<span class="fa fa-sort-up columnSortIcons" ng-if="vm.isActiveSort('Year', 1)"></span>
+										</th>
+										<th class="pointer" ng-click="vm.sortBy('Type')">
+											Type
+											<span class="fa fa-sort-down columnSortIcons" ng-if="vm.isActiveSort('Type')"></span>
+											<span class="fa fa-sort-up columnSortIcons" ng-if="vm.isActiveSort('Type', 1)"></span>
+										</th>										
+									</tr>
+								</thead>
+								<tbody>
+									<tr ng-repeat="movie in vm.movies | filter:searchedMovie | orderBy:orderProperty track by $index">
+										<td>											
+											<a class="btn btn-primary" ng-click="vm.getDetails(movie)">
+											<i class="fa fa-plus fa-white"></i>
+												Get
+											</a>
+										</td>
+										<td>{{movie.Title}}</td>
+										<td>{{movie.Year}}</td>										
+										<td>{{movie.Type}}</td>
+									</tr>
+								</tbody>					
+							</table>
+						</div>     							
+					</div>							
+				</div>					
+			</div>					
+		</div>		
 	</div>
 </div>

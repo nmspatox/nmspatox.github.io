@@ -2,7 +2,7 @@
 function(){
 	angular.module('MoviesApp')
 	.controller('MoviesListController', MoviesListController)
-	.controller('MoviesEditController', MoviesEditController);;
+	.controller('MoviesEditController', MoviesEditController);
 
 	function MoviesListController(MoviesService){
 		var vm = this;
@@ -43,12 +43,15 @@ function(){
 		}		
 	}
 
-	function MoviesEditController(MoviesService, $routeParams, $location) {
+	function MoviesEditController($routeParams, $location, MoviesService, MoviesOMDBService) {
 		var vm = this;
 		vm.id = $routeParams.id;
 
 		vm.movie = MoviesService.getById(vm.id);
+		vm.movies = [];
 		vm.updateMovie = updateMovie;
+		vm.searchInOMDB = searchInOMDB;
+		vm.getDetails = getDetails;
 
 		function updateMovie(movie, form){
 			if (form.$valid){
@@ -58,6 +61,23 @@ function(){
 				$location.url('/movies/');
 			}			
 		}
+
+		function searchInOMDB(){			
+			if (vm.movie.title){				
+				MoviesOMDBService.searchByTitle(vm.movie.title)
+					.success(function(data) {			            
+			            vm.movies = data.Search;
+			        })
+			        .error(function(data) {
+			            console.log('Error: ' + data);
+		        });	
+			}
+		}	
+
+		function getDetails(movieFromList) {
+			vm.movie.year = parseInt(movieFromList.Year);
+			vm.movie.poster = movieFromList.Poster;
+		}	
 	}
 }
 )();
