@@ -15,14 +15,14 @@ function(){
 		vm.deleteMovie = (idx) => MoviesService.deleteMovie(idx);
 		vm.sortBy = sortBy;
 		vm.isActiveSort = (x, y) => vm.orderProperty == x && vm.orderDirection != y;
-		vm.reset = resetForm;
+		vm.resetForm = resetForm;
 
 		vm.refreshMovies();
 
 		function addNewMovie(movie, form){
 			if (form.$valid){
 				MoviesService.addMovie(movie);
-				vm.resetForm();
+				vm.resetForm(form);
 			}			
 		}
 
