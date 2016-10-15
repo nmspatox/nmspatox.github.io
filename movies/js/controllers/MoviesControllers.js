@@ -2,16 +2,19 @@
 function(){
 	angular.module('MoviesApp')
 	.controller('MoviesListController', MoviesListController)
-	.controller('MoviesEditController', MoviesEditController);
+	.controller('MoviesEditController', MoviesEditController)
+	.controller('ModalInstanceCtrl', ModalInstanceCtrl);
 
-	function MoviesListController(MoviesService){
+	function MoviesListController(MoviesService, $uibModal){
 		var vm = this;
 
 		vm.movie = {};
 		vm.orderProperty = 'title';		
-		vm.orderDirection= 1;		
+		vm.orderDirection= 1;			
+
 		vm.refreshMovies = refreshMovies;
 		vm.addMovie = addNewMovie;
+		vm.confirmDelete = confirmDelete;
 		vm.deleteMovie = (idx) => MoviesService.deleteMovie(idx);
 		vm.sortBy = sortBy;
 		vm.isActiveSort = (x, y) => vm.orderProperty == x && vm.orderDirection != y;
@@ -40,7 +43,23 @@ function(){
 			vm.movie = {};
 			form.$setPristine();
 			form.$setUntouched();
-		}		
+		}
+
+		function confirmDelete(idx) {
+		    
+		    var modalInstance = $uibModal.open({
+		      //animation: $ctrl.animationsEnabled,
+		      ariaLabelledBy: 'modal-title',
+		      ariaDescribedBy: 'modal-body',
+		      templateUrl: 'myModalContent.html',
+		      controller: 'ModalInstanceCtrl',
+		      controllerAs: 'vm'
+		    });
+
+		    modalInstance.result.then(
+		    	()=>vm.deleteMovie(idx)
+		    );
+		  };
 	}
 
 	function MoviesEditController($routeParams, $location, MoviesService, MoviesOMDBService) {
@@ -50,6 +69,13 @@ function(){
 
 		vm.movie = MoviesService.getById(vm.id);
 		vm.movies = [];
+		vm.maxRate = 10;
+		vm.isReadonly = false;
+
+		vm.rateHoveringOver = (value)=> {
+			//vm.overStar = value;
+		};
+
 		vm.updateMovie = updateMovie;
 		vm.searchInOMDB = searchInOMDB;
 		vm.getDetails = getDetails;
@@ -83,6 +109,18 @@ function(){
 			vm.movie.poster = movieFromList.Poster;
 			vm.movie.imdbId = movieFromList.imdbID;
 		}	
+	}
+
+	function ModalInstanceCtrl ($uibModalInstance) {
+	  var vm = this;
+
+	  vm.ok = function () {
+	    $uibModalInstance.close(true);
+	  };
+
+	  vm.cancel = function () {
+	    $uibModalInstance.dismiss('cancel');
+	  };
 	}
 }
 )();

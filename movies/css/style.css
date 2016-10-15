@@ -52,3 +52,7 @@
 .loading{
 	color: green;
 }
+
+.movie-rate i{
+	text-decoration: none;
+}

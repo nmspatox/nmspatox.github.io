@@ -1,4 +1,4 @@
 (
 function(){
-  angular.module('MoviesApp', ['ngRoute']);
+  angular.module('MoviesApp', ['ngRoute', 'ngAnimate', 'ui.bootstrap']);
 })();
